@@ -20,6 +20,7 @@ data/
   catalog/
     index.json
     <snapshot>.plan.json
+    <snapshot>.report.json
   snapshots/
     <snapshot_id>/
       manifest.json
@@ -35,6 +36,12 @@ results/
 
 The import plan is reviewable intent. The snapshot manifest is evidence that the
 declared bytes were verified and copied.
+
+The generated snapshot report is an operational inventory only. For CSV files
+it records columns, row count, missing values, and the first and last populated
+date column when one is present. For other files it records format, size, and
+hash. It is rebuilt from the immutable snapshot and does not grant a
+provisional snapshot final status.
 
 Snapshot payloads are marked `-text` in `.gitattributes`, so Git never changes
 line endings and invalidates byte-level hashes on checkout.

@@ -5,6 +5,8 @@ Data is stored as immutable, manifest-backed snapshots.
 ## Layout
 
 - `catalog/` contains import plans and the snapshot index.
+- `catalog/<snapshot_id>.report.json` contains generated file-level coverage
+  metadata (CSV columns, row counts, date spans, and missingness).
 - `snapshots/<snapshot_id>/manifest.json` records source, status, and file hashes.
 - `snapshots/<snapshot_id>/files/` contains byte-exact imported inputs.
 
@@ -24,3 +26,7 @@ same hashes or identify a replacement final snapshot.
   migrated by default.
 - A round references a snapshot manifest and any round-specific derived dataset;
   it does not silently read whichever file happens to be newest.
+- Build a coverage report with
+  `python -m decision_tree_model.cli describe-data --snapshot <snapshot_id>`.
+  Reports are derived metadata and never replace the manifest as the integrity
+  or provenance source of truth.

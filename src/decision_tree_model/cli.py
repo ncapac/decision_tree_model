@@ -8,6 +8,7 @@ from pathlib import Path
 from decision_tree_model.presentation import build_round_notebook
 from decision_tree_model.validation import ContractError, validate_round_manifest
 from decision_tree_model.workflows.completion import create_completion_record
+from decision_tree_model.workflows.data_catalog import build_snapshot_report
 from decision_tree_model.workflows.data_snapshot import import_data_snapshot
 from decision_tree_model.workflows.indexing import build_data_index, build_round_index
 from decision_tree_model.workflows.recovery import RecoveryPlan, recover_legacy_round
@@ -25,6 +26,9 @@ def build_parser() -> argparse.ArgumentParser:
     validate.add_argument("--round", default="round_000")
 
     subparsers.add_parser("build-index")
+
+    describe = subparsers.add_parser("describe-data")
+    describe.add_argument("--snapshot", required=True)
 
     recover = subparsers.add_parser("recover-legacy")
     recover.add_argument("--round", default="round_000")
@@ -59,6 +63,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     elif args.command == "build-index":
         print(build_round_index(root))
         print(build_data_index(root))
+    elif args.command == "describe-data":
+        print(build_snapshot_report(root, args.snapshot))
     elif args.command == "recover-legacy":
         recovery_result = recover_legacy_round(
             root,

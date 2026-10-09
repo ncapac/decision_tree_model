@@ -64,6 +64,7 @@ def build_data_index(project_root: Path) -> Path:
                 "manifest": str(manifest_path.relative_to(project_root)).replace(
                     "\\", "/"
                 ),
+                "report": (f"data/catalog/{manifest['snapshot_id']}.report.json"),
             }
         )
 
