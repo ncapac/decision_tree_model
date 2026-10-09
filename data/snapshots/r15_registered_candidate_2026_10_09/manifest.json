@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "r15_registered_candidate_2026_10_09",
+  "status": "provisional",
+  "source": {
+    "project": "kiss_etf_optimizer",
+    "repository_revision": "ae5157666db8b08d77356cc5013eff64040d285b",
+    "superproject_revision": "26dccb375fd0cfe40fe2258bbf0d5e7e5f67e054",
+    "worktree_dirty": false
+  },
+  "imported_at_utc": "2026-10-09T12:50:47.419218+00:00",
+  "files": [
+    {
+      "role": "market_panel",
+      "source_path": "data/asset_indices.csv",
+      "target_path": "panels/asset_indices.csv",
+      "sha256": "785f168ce4986439b2d0261d5a5556b449be9d7d535efe8c73243c24fbcc02b5"
+    },
+    {
+      "role": "overlay_panel",
+      "source_path": "data/fx_overlay.csv",
+      "target_path": "panels/fx_overlay.csv",
+      "sha256": "5bc07b0fa010ff8e5df75bdb31b3012a805424516add3792bd208a18180dfc65"
+    },
+    {
+      "role": "fx_panel",
+      "source_path": "data/fx_rates.csv",
+      "target_path": "panels/fx_rates.csv",
+      "sha256": "7b8d161fc9220c0dee67bedf4519ca3c32460b02ca8765c26d041365442e8027"
+    },
+    {
+      "role": "macro_feature_panel",
+      "source_path": "data/macro_features.csv",
+      "target_path": "panels/macro_features.csv",
+      "sha256": "9a29278151345d008337b69d0918753e38d46c483560b1e3723cb41956a2cc42"
+    },
+    {
+      "role": "engine_panel",
+      "source_path": "data/macro_raw.csv",
+      "target_path": "panels/macro_raw.csv",
+      "sha256": "ec775504c6007a416ca569271e8cff8a8e2d32b9da4eb7a7ffebef4c7948dcad"
+    },
+    {
+      "role": "rate_panel",
+      "source_path": "data/rate_levels.csv",
+      "target_path": "panels/rate_levels.csv",
+      "sha256": "06c817a06861bc09c8c4770407358b999180ee03c0c62898d2d93b866319af80"
+    },
+    {
+      "role": "state_daily_panel",
+      "source_path": "data/state_daily.csv",
+      "target_path": "r15_macro/state_daily.csv",
+      "sha256": "183c0cb68a3001399911a26b5996dd109f9debc21de225eaad6c6954a6f8c67d"
+    },
+    {
+      "role": "r15_macro_panel",
+      "source_path": "data/macro_daily.csv",
+      "target_path": "r15_macro/macro_daily.csv",
+      "sha256": "8e7136333694fa1e88701e325f2b53edef4a5c9f566c7ad8bd1f4e0071cec8a9"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/AAA10Y.csv",
+      "target_path": "r15_macro/fred/AAA10Y.csv",
+      "sha256": "5cbf6c972666062d12269db82db19a97cdc69374edbeeb64f097dd74acf94887"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/BAA10Y.csv",
+      "target_path": "r15_macro/fred/BAA10Y.csv",
+      "sha256": "1b86a998d2bfb50935290ca0b074a0eee7271679cd35b8be4f1159f53f165a77"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/CFNAI.csv",
+      "target_path": "r15_macro/fred/CFNAI.csv",
+      "sha256": "411c9468074fb1a51191d8cca4d5e5dc96316c7911cad4f492407cb67c9a2eb4"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/DCOILWTICO.csv",
+      "target_path": "r15_macro/fred/DCOILWTICO.csv",
+      "sha256": "38483f4e69b2ea0028667f4eed7eadd0d384692d331234d61a6af9b62ba2d140"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/DFF.csv",
+      "target_path": "r15_macro/fred/DFF.csv",
+      "sha256": "440c6c37da4a1c57b895c34b31d899e3066a23cfdd24c470cba1f048ca481ce3"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/DGS3MO.csv",
+      "target_path": "r15_macro/fred/DGS3MO.csv",
+      "sha256": "423bf663dc6cfa67a46139c23e034b7a11c2b3dadda572fea44715b4c00ab961"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/ICSA.csv",
+      "target_path": "r15_macro/fred/ICSA.csv",
+      "sha256": "0910abb3f9bab87d1a277f3c567ea7c3d83cc2260f5a4a9587eebe306fb80823"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/INDPRO.csv",
+      "target_path": "r15_macro/fred/INDPRO.csv",
+      "sha256": "1a916926060d09b970880153da76d36040505666dbe686ae2abda1ff7eba6279"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/NFCI.csv",
+      "target_path": "r15_macro/fred/NFCI.csv",
+      "sha256": "dced46c27eae5349b9c52b710fabe65368dfdcae06f7b42e82bb7e4017850967"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/PAYEMS.csv",
+      "target_path": "r15_macro/fred/PAYEMS.csv",
+      "sha256": "c8c429818ed73de6db985f4ff565d64bd2a5ba66a6b651b39373a1532924fc0e"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/T10Y2Y.csv",
+      "target_path": "r15_macro/fred/T10Y2Y.csv",
+      "sha256": "706f9502a2133760d125009c249dcc7383c88b69c8cd710283aad414eb288aab"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/T10Y3M.csv",
+      "target_path": "r15_macro/fred/T10Y3M.csv",
+      "sha256": "ea6d51b4116e6c5b463bab7fab6eba0ded988921ff126594b492c0dc6690cac6"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/UNRATE.csv",
+      "target_path": "r15_macro/fred/UNRATE.csv",
+      "sha256": "621ff6fadf50910cb7a21ee20ba610c247cb043b29b4e05c4c1a72fadca2a06c"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/VIXCLS.csv",
+      "target_path": "r15_macro/fred/VIXCLS.csv",
+      "sha256": "cc0b59b37b714477d604de46fba408fd888e82308561111a772f3aacf931387f"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/alfred/CFNAI_realtime.zip",
+      "target_path": "r15_macro/fred/alfred/CFNAI_realtime.zip",
+      "sha256": "b2fab041775d7fe28364e8127d6aa33d74e48b4c8187d67338a0a14bfe629acf"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/alfred/ICSA_realtime.zip",
+      "target_path": "r15_macro/fred/alfred/ICSA_realtime.zip",
+      "sha256": "9bbbc531fcbd95de983bedcde5dd8936e02c13c4df0e42e8629c4e99e0c01a36"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/alfred/INDPRO_realtime.zip",
+      "target_path": "r15_macro/fred/alfred/INDPRO_realtime.zip",
+      "sha256": "b0a0c74b579b2aef41b54a3a192c1c61aa06ed7f87f3a6491466432b302502eb"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/alfred/NFCI_vintages.csv",
+      "target_path": "r15_macro/fred/alfred/NFCI_vintages.csv",
+      "sha256": "ed66ca3d4f065fb79865d5b1f3c625342001d4b37ae499f5ed557135f33fd199"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/alfred/PAYEMS_realtime.zip",
+      "target_path": "r15_macro/fred/alfred/PAYEMS_realtime.zip",
+      "sha256": "24894db00f9826305a7af72e0110283583b730de56840c9c5553f358fdac341d"
+    },
+    {
+      "role": "r15_macro_source",
+      "source_path": "data/fred_r15/alfred/UNRATE_realtime.zip",
+      "target_path": "r15_macro/fred/alfred/UNRATE_realtime.zip",
+      "sha256": "9a2d99430b28accb6d923f13321d5db8285386eae301857aa0de2ddd095007bb"
+    },
+    {
+      "role": "source_manifest",
+      "source_path": "data/fred_r15/manifest.json",
+      "target_path": "r15_macro/fred/manifest.json",
+      "sha256": "9c820a3a8f96542b3847d76cc682556ff1780e3fcdecad484d0a365ec928d01c"
+    }
+  ],
+  "notes": [
+    "Provisional snapshot of inputs pinned by the unfinished R15 registration.",
+    "This snapshot is not final Round 000 evidence.",
+    "The R15 completion record must confirm or replace these hashes."
+  ]
+}

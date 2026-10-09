@@ -1,0 +1,23 @@
+project:
+  name: decision_tree_model
+  version: 0.1.0
+  root: .
+  default_round: round_000
+  output_root: results
+  round_root: results
+
+platform:
+  path_policy: relative_paths_only
+  artifact_index: results/index.json
+  provenance_required: true
+  immutable_legacy_imports: true
+
+rounds:
+  default_registry: results
+  result_dir_template: "results/{round_id}/artifacts"
+  notebook_dir_template: "results/{round_id}/notebooks"
+
+validation:
+  require_manifest: true
+  require_provenance: true
+  require_hashes: true

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://decision-tree-model.local/schemas/artifact.schema.json",
+  "title": "Round artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "path",
+    "sha256",
+    "origin",
+    "immutable"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^results/round_[0-9]{3}/"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_path", "source_sha256"],
+      "properties": {
+        "source_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "immutable": {
+      "const": true
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

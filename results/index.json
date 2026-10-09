@@ -1,0 +1,12 @@
+[
+  {
+    "round_id": "round_000",
+    "name": "pending_r15_recovery",
+    "status": "awaiting_source_completion",
+    "kind": "legacy_recovery",
+    "source_project": "kiss_etf_optimizer",
+    "source_round": "R15",
+    "artifact_count": 0,
+    "has_results": false
+  }
+]

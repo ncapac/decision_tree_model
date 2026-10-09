@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "round_id": "round_000",
+  "name": "pending_r15_recovery",
+  "status": "awaiting_source_completion",
+  "kind": "legacy_recovery",
+  "source": {
+    "project": "kiss_etf_optimizer",
+    "round": "R15",
+    "completion_confirmed": false,
+    "repository_revision": null,
+    "source_manifest_path": null,
+    "source_manifest_sha256": null
+  },
+  "recovery": {
+    "started": false,
+    "completed": false,
+    "imported_at_utc": null,
+    "import_tool_version": null
+  },
+  "artifacts": [],
+  "notes": [
+    "R15 is still in progress; no R15 result has been imported.",
+    "This manifest reserves round_000 and defines the recovery gate only."
+  ]
+}

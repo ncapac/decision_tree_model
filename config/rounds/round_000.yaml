@@ -1,0 +1,25 @@
+round_id: round_000
+name: pending_r15_recovery
+status: awaiting_source_completion
+source_type: legacy_recovery
+source_project: kiss_etf_optimizer
+source_round: R15
+classification: neutral_import
+
+metadata:
+  imported: false
+  source_completion_confirmed: false
+  recovery_started: false
+  provenance_required: true
+
+artifacts:
+  manifest: results/round_000/manifest.json
+  notebook_dir: results/round_000/notebooks
+  results_dir: results/round_000/artifacts
+
+validation:
+  require_manifest: true
+  require_round_summary: false
+  require_provenance: true
+  require_hashes: true
+  refuse_import_before_source_completion: true

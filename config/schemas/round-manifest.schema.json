@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://decision-tree-model.local/schemas/round-manifest.schema.json",
+  "title": "Decision Tree Model round manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "round_id",
+    "name",
+    "status",
+    "kind",
+    "source",
+    "recovery",
+    "artifacts",
+    "notes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "round_id": {
+      "type": "string",
+      "pattern": "^round_[0-9]{3}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "awaiting_source_completion",
+        "recovering",
+        "recovered",
+        "registered",
+        "running",
+        "complete",
+        "closed"
+      ]
+    },
+    "kind": {
+      "enum": ["legacy_recovery", "native_round"]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project",
+        "round",
+        "completion_confirmed",
+        "repository_revision",
+        "source_manifest_path",
+        "source_manifest_sha256"
+      ],
+      "properties": {
+        "project": {
+          "type": "string",
+          "minLength": 1
+        },
+        "round": {
+          "type": "string",
+          "minLength": 1
+        },
+        "completion_confirmed": {
+          "type": "boolean"
+        },
+        "repository_revision": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "source_manifest_path": {
+          "type": ["string", "null"]
+        },
+        "source_manifest_sha256": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "started",
+        "completed",
+        "imported_at_utc",
+        "import_tool_version"
+      ],
+      "properties": {
+        "started": {
+          "type": "boolean"
+        },
+        "completed": {
+          "type": "boolean"
+        },
+        "imported_at_utc": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "import_tool_version": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "https://decision-tree-model.local/schemas/artifact.schema.json"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

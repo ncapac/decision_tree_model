@@ -1,0 +1,11 @@
+[
+  {
+    "snapshot_id": "r15_registered_candidate_2026_10_09",
+    "status": "provisional",
+    "source_project": "kiss_etf_optimizer",
+    "source_revision": "ae5157666db8b08d77356cc5013eff64040d285b",
+    "source_superproject_revision": "26dccb375fd0cfe40fe2258bbf0d5e7e5f67e054",
+    "file_count": 29,
+    "manifest": "data/snapshots/r15_registered_candidate_2026_10_09/manifest.json"
+  }
+]
