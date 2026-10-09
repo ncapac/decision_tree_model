@@ -1,10 +1,8 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import shutil
-import subprocess
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -17,6 +15,7 @@ from decision_tree_model.validation import (
     validate_round_manifest,
     validate_source_completion,
 )
+from decision_tree_model.workflows.git_provenance import capture_git_provenance
 
 
 @dataclass(frozen=True)
@@ -33,16 +32,6 @@ class RecoveryResult:
     executed: bool
 
 
-def _git(source_root: Path, *args: str) -> str:
-    completed = subprocess.run(
-        ["git", "-C", str(source_root), *args],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    return completed.stdout.strip()
-
-
 def _resolve_beneath(root: Path, relative_path: str) -> Path:
     candidate = (root / relative_path).resolve()
     if not candidate.is_relative_to(root.resolve()):
@@ -54,38 +43,14 @@ def _verify_source(
     source_root: Path, completion: dict[str, Any]
 ) -> list[tuple[dict[str, Any], Path]]:
     repository = completion["repository"]
-    actual_revision = _git(source_root, "rev-parse", "HEAD")
-    if actual_revision != repository["revision"]:
-        raise ContractError(
-            f"Source revision mismatch: expected {repository['revision']}, "
-            f"found {actual_revision}"
+    actual = capture_git_provenance(source_root)
+    if actual != repository:
+        mismatches = sorted(
+            key for key in repository if repository[key] != actual.get(key)
         )
-
-    is_dirty = bool(_git(source_root, "status", "--porcelain"))
-    if is_dirty != repository["worktree_dirty"]:
         raise ContractError(
-            "Source worktree dirtiness does not match completion record"
+            "Source repository provenance mismatch: " + ", ".join(mismatches)
         )
-
-    if is_dirty:
-        diff = subprocess.run(
-            ["git", "-C", str(source_root), "diff", "--binary", "HEAD"],
-            check=True,
-            capture_output=True,
-        ).stdout
-        if hashlib.sha256(diff).hexdigest() != repository["diff_sha256"]:
-            raise ContractError(
-                "Source worktree diff hash does not match completion record"
-            )
-
-    superproject_root = _git(
-        source_root, "rev-parse", "--show-superproject-working-tree"
-    )
-    if not superproject_root:
-        raise ContractError("Source repository is expected to be a submodule")
-    superproject_revision = _git(Path(superproject_root), "rev-parse", "HEAD")
-    if superproject_revision != repository["superproject_revision"]:
-        raise ContractError("Superproject revision does not match completion record")
 
     verified: list[tuple[dict[str, Any], Path]] = []
     for artifact in completion["artifacts"]:

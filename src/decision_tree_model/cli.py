@@ -7,6 +7,7 @@ from pathlib import Path
 
 from decision_tree_model.presentation import build_round_notebook
 from decision_tree_model.validation import ContractError, validate_round_manifest
+from decision_tree_model.workflows.completion import create_completion_record
 from decision_tree_model.workflows.data_snapshot import import_data_snapshot
 from decision_tree_model.workflows.indexing import build_data_index, build_round_index
 from decision_tree_model.workflows.recovery import RecoveryPlan, recover_legacy_round
@@ -38,6 +39,13 @@ def build_parser() -> argparse.ArgumentParser:
     data.add_argument("--source-root", required=True, type=Path)
     data.add_argument("--plan", required=True, type=Path)
     data.add_argument("--execute", action="store_true")
+
+    completion = subparsers.add_parser("create-completion-record")
+    completion.add_argument("--source-root", required=True, type=Path)
+    completion.add_argument("--inventory", required=True, type=Path)
+    completion.add_argument("--output", required=True, type=Path)
+    completion.add_argument("--execute", action="store_true")
+    completion.add_argument("--confirm-source-complete", action="store_true")
     return parser
 
 
@@ -79,6 +87,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(
             f"{action} {data_result.file_count} files for {data_result.snapshot_id}: "
             f"{data_result.manifest_path}"
+        )
+    elif args.command == "create-completion-record":
+        completion_result = create_completion_record(
+            args.source_root,
+            args.inventory,
+            args.output,
+            execute=args.execute,
+            confirm_source_complete=args.confirm_source_complete,
+        )
+        action = "Wrote" if completion_result.written else "Validated"
+        print(
+            f"{action} {completion_result.artifact_count} artifacts for "
+            f"{completion_result.source_project}/{completion_result.source_round}: "
+            f"{completion_result.output_path}"
         )
     return 0
 

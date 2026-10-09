@@ -11,12 +11,17 @@ After installation, use `dtm`:
 dtm validate-round --round round_000
 dtm build-index
 dtm import-data --source-root <path> --plan <path>
+dtm create-completion-record --source-root <path> --inventory <path> `
+  --output <path>
 dtm recover-legacy --round round_000 --source-root <path> `
   --completion-record <path>
 dtm build-notebook --round round_000
 ```
 
 `python -m decision_tree_model` exposes the same commands.
+
+Completion-record creation validates and hashes the selected source artifacts by
+default. Writing requires both `--execute` and `--confirm-source-complete`.
 
 ## Structure
 

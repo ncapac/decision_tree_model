@@ -189,5 +189,186 @@
     "Provisional snapshot of inputs pinned by the unfinished R15 registration.",
     "This snapshot is not final Round 000 evidence.",
     "The R15 completion record must confirm or replace these hashes."
+  ],
+  "datasets": [
+    {
+      "dataset_id": "engine_panels_2026_09",
+      "stage": "curated",
+      "file_paths": [
+        "panels/asset_indices.csv",
+        "panels/fx_overlay.csv",
+        "panels/fx_rates.csv",
+        "panels/macro_features.csv",
+        "panels/macro_raw.csv",
+        "panels/rate_levels.csv"
+      ],
+      "description": "Frozen market, currency, rate and feature panels used by the portfolio engine.",
+      "provider": {
+        "name": "KISS internal source workbook and project transformations",
+        "url": null
+      },
+      "license": "internal/proprietary; redistribution rights not established",
+      "frequency": "mixed engine grid and source frequencies",
+      "units": "mixed; defined by the source panel columns and round registration",
+      "availability": {
+        "vintage_mode": "frozen_snapshot",
+        "publication_lag": "defined per source column",
+        "as_of": "2026-09 vintage",
+        "missingness_policy": "leading unavailability remains missing and constrains feasibility"
+      },
+      "causality": "Downstream loaders must apply the registered observation, decision and publication clocks.",
+      "lineage": [
+        "kiss_etf_optimizer data panels",
+        "R15 panel_fingerprint SHA-256 pins"
+      ]
+    },
+    {
+      "dataset_id": "r15_state_daily",
+      "stage": "curated",
+      "file_paths": [
+        "r15_macro/state_daily.csv"
+      ],
+      "description": "Daily EUR asset and FX index levels used to build the R15 weekly state layer.",
+      "provider": {
+        "name": "KISS internal source workbook and project transformations",
+        "url": null
+      },
+      "license": "internal/proprietary; redistribution rights not established",
+      "frequency": "daily",
+      "units": "total-return and FX index levels",
+      "availability": {
+        "vintage_mode": "frozen_snapshot",
+        "publication_lag": "market close",
+        "as_of": "2026-09 vintage",
+        "missingness_policy": "no backfill across unavailable history"
+      },
+      "causality": "Weekly features use information through their W-WED stamp; future state labels are never model inputs.",
+      "lineage": [
+        "2026-09 daily asset and FX index levels",
+        "R15 state_daily registered pin"
+      ]
+    },
+    {
+      "dataset_id": "r15_macro_daily",
+      "stage": "curated",
+      "file_paths": [
+        "r15_macro/macro_daily.csv"
+      ],
+      "description": "Publication-aware daily macro panel prepared for R15 state candidates.",
+      "provider": {
+        "name": "FRED and ALFRED via R15 transformations",
+        "url": "https://fred.stlouisfed.org/"
+      },
+      "license": "FRED terms of use; underlying series-specific rights may apply",
+      "frequency": "daily panel with mixed underlying release frequencies",
+      "units": "mixed; encoded by feature definition",
+      "availability": {
+        "vintage_mode": "mixed",
+        "publication_lag": "series-specific and registered",
+        "as_of": "2026-10-05 source pull",
+        "missingness_policy": "unavailable observations remain unavailable; no backward fill"
+      },
+      "causality": "Features must respect source release/vintage timing and the registered R15 information set.",
+      "lineage": [
+        "R15 FRED/ALFRED source bundle",
+        "R15 macro feature construction"
+      ]
+    },
+    {
+      "dataset_id": "fred_latest_release_sources",
+      "stage": "raw",
+      "file_paths": [
+        "r15_macro/fred/AAA10Y.csv",
+        "r15_macro/fred/BAA10Y.csv",
+        "r15_macro/fred/CFNAI.csv",
+        "r15_macro/fred/DCOILWTICO.csv",
+        "r15_macro/fred/DFF.csv",
+        "r15_macro/fred/DGS3MO.csv",
+        "r15_macro/fred/ICSA.csv",
+        "r15_macro/fred/INDPRO.csv",
+        "r15_macro/fred/NFCI.csv",
+        "r15_macro/fred/PAYEMS.csv",
+        "r15_macro/fred/T10Y2Y.csv",
+        "r15_macro/fred/T10Y3M.csv",
+        "r15_macro/fred/UNRATE.csv",
+        "r15_macro/fred/VIXCLS.csv"
+      ],
+      "description": "Raw current-release FRED series banked for the R15 data phase.",
+      "provider": {
+        "name": "Federal Reserve Bank of St. Louis FRED",
+        "url": "https://fred.stlouisfed.org/"
+      },
+      "license": "FRED terms of use; underlying series-specific rights may apply",
+      "frequency": "mixed daily, weekly and monthly",
+      "units": "series-specific; recorded in the bundled provider manifest",
+      "availability": {
+        "vintage_mode": "latest_release",
+        "publication_lag": "series-specific",
+        "as_of": "2026-10-05 source pull",
+        "missingness_policy": "provider missing values preserved"
+      },
+      "causality": "Latest-release files are raw sources, not automatically valid point-in-time inputs.",
+      "lineage": [
+        "FRED CSV downloads",
+        "fred/manifest.json file hashes and coverage metadata"
+      ]
+    },
+    {
+      "dataset_id": "alfred_realtime_sources",
+      "stage": "raw",
+      "file_paths": [
+        "r15_macro/fred/alfred/CFNAI_realtime.zip",
+        "r15_macro/fred/alfred/ICSA_realtime.zip",
+        "r15_macro/fred/alfred/INDPRO_realtime.zip",
+        "r15_macro/fred/alfred/NFCI_vintages.csv",
+        "r15_macro/fred/alfred/PAYEMS_realtime.zip",
+        "r15_macro/fred/alfred/UNRATE_realtime.zip"
+      ],
+      "description": "Raw ALFRED vintage histories banked for point-in-time R15 transformations.",
+      "provider": {
+        "name": "Federal Reserve Bank of St. Louis ALFRED",
+        "url": "https://alfred.stlouisfed.org/"
+      },
+      "license": "FRED/ALFRED terms of use; underlying series-specific rights may apply",
+      "frequency": "mixed weekly and monthly release vintages",
+      "units": "series-specific; recorded in the bundled provider manifest",
+      "availability": {
+        "vintage_mode": "realtime_vintages",
+        "publication_lag": "explicit vintage dates",
+        "as_of": "2026-10-05 source pull",
+        "missingness_policy": "provider missing values and vintage boundaries preserved"
+      },
+      "causality": "A model may use only the vintage published by its evaluation timestamp.",
+      "lineage": [
+        "ALFRED real-time downloads",
+        "fred/manifest.json vintage metadata and hashes"
+      ]
+    },
+    {
+      "dataset_id": "r15_macro_source_manifest",
+      "stage": "raw",
+      "file_paths": [
+        "r15_macro/fred/manifest.json"
+      ],
+      "description": "Provider URLs, download timestamps, coverage, units and byte hashes for the R15 macro source bundle.",
+      "provider": {
+        "name": "R15 data acquisition record",
+        "url": null
+      },
+      "license": "metadata; source-series terms remain controlling",
+      "frequency": "not applicable",
+      "units": "not applicable",
+      "availability": {
+        "vintage_mode": "frozen_snapshot",
+        "publication_lag": "not applicable",
+        "as_of": "2026-10-05",
+        "missingness_policy": "not applicable"
+      },
+      "causality": "Audit metadata only; it is not a model feature.",
+      "lineage": [
+        "R15 data acquisition process",
+        "SHA-256-verified provider files"
+      ]
+    }
   ]
 }

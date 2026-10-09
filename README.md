@@ -50,6 +50,7 @@ This means:
 - no notebook execution as the main research engine
 - no round-specific logic in shared infrastructure
 - all artifacts must be indexed and versioned
+- every input file must belong to one documented dataset
 - all imported historical results must record their original provenance
 - scientific claims must be supported by machine-readable evidence
 

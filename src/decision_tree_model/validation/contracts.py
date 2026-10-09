@@ -97,10 +97,49 @@ def validate_round_manifest(path: Path) -> dict[str, Any]:
 
 def validate_source_completion(path: Path) -> dict[str, Any]:
     payload = load_json(path)
+    validate_source_completion_payload(payload)
+    return payload
+
+
+def validate_source_completion_payload(payload: dict[str, Any]) -> None:
     validate_schema(payload, "source-completion.schema.json")
     repository = payload["repository"]
     if repository["worktree_dirty"] and not repository["diff_sha256"]:
         raise ContractError("A dirty source worktree requires diff_sha256")
     if not repository["worktree_dirty"] and repository["diff_sha256"] is not None:
         raise ContractError("A clean source worktree must set diff_sha256 to null")
-    return payload
+
+
+def validate_data_snapshot_payload(payload: dict[str, Any]) -> None:
+    validate_schema(payload, "data-snapshot.schema.json")
+    file_paths = [record["target_path"] for record in payload["files"]]
+    if len(file_paths) != len(set(file_paths)):
+        raise ContractError("Data snapshot contains duplicate target paths")
+
+    dataset_ids = [dataset["dataset_id"] for dataset in payload["datasets"]]
+    if len(dataset_ids) != len(set(dataset_ids)):
+        raise ContractError("Data snapshot contains duplicate dataset identifiers")
+
+    covered = [
+        file_path
+        for dataset in payload["datasets"]
+        for file_path in dataset["file_paths"]
+    ]
+    duplicates = sorted(
+        file_path for file_path in set(covered) if covered.count(file_path) > 1
+    )
+    if duplicates:
+        raise ContractError(
+            "Data files assigned to multiple datasets: " + ", ".join(duplicates)
+        )
+
+    missing = sorted(set(file_paths) - set(covered))
+    unknown = sorted(set(covered) - set(file_paths))
+    if missing:
+        raise ContractError(
+            "Data files missing dataset metadata: " + ", ".join(missing)
+        )
+    if unknown:
+        raise ContractError(
+            "Dataset metadata names unknown files: " + ", ".join(unknown)
+        )

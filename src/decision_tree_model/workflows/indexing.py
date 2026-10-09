@@ -6,8 +6,8 @@ from pathlib import Path
 
 from decision_tree_model.validation import (
     load_json,
+    validate_data_snapshot_payload,
     validate_round_manifest,
-    validate_schema,
 )
 
 
@@ -49,7 +49,7 @@ def build_data_index(project_root: Path) -> Path:
     snapshots_root = project_root / "data" / "snapshots"
     for manifest_path in sorted(snapshots_root.glob("*/manifest.json")):
         manifest = load_json(manifest_path)
-        validate_schema(manifest, "data-snapshot.schema.json")
+        validate_data_snapshot_payload(manifest)
         entries.append(
             {
                 "snapshot_id": manifest["snapshot_id"],
@@ -60,6 +60,7 @@ def build_data_index(project_root: Path) -> Path:
                     "superproject_revision"
                 ],
                 "file_count": len(manifest["files"]),
+                "dataset_count": len(manifest["datasets"]),
                 "manifest": str(manifest_path.relative_to(project_root)).replace(
                     "\\", "/"
                 ),

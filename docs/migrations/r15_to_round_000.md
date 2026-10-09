@@ -41,6 +41,20 @@ After R15 closes, create one JSON completion record conforming to
 - SHA-256 for every artifact;
 - a neutral description of every artifact.
 
+Start from `config/recovery/r15_completion_inventory.template.json`. Set
+`source_complete` only after formal closure, enumerate the selected artifacts,
+then run:
+
+```powershell
+dtm create-completion-record `
+  --source-root C:\path\to\kiss_etf_optimizer `
+  --inventory C:\path\to\r15_completion_inventory.json `
+  --output C:\path\to\r15_source_completion.json
+```
+
+Review the dry-run result, then repeat with `--execute` and
+`--confirm-source-complete`.
+
 The artifact list must include, when they exist:
 
 1. final resolved R15 registration and amendments;
@@ -51,6 +65,12 @@ The artifact list must include, when they exist:
 6. evaluation distributions and point-estimate reconciliation;
 7. final result summary and decision record;
 8. the minimal source documentation needed to interpret those artifacts.
+
+For D9, the inventory should also capture the final per-split base-band choice,
+common-reference member scores, mandate restoration audit, seam-block records,
+nested eligibility, placebo recomputation, held-out access proof, average-book
+projection result, point-estimate reconciliation, D7/D8 verification, timing
+stop, and deployed-object verification when those artifacts exist.
 
 Search logs, temporary checkpoints, caches, failed-run output, and presentation
 duplicates are excluded unless the final audit explicitly depends on them.

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "source_project": "kiss_etf_optimizer",
+  "source_round": "R15",
+  "source_complete": false,
+  "artifacts": [],
+  "notes": [
+    "Copy this template only after R15 closes.",
+    "Set source_complete to true and enumerate the final audit artifacts.",
+    "D9 staging decisions are not completion evidence."
+  ]
+}

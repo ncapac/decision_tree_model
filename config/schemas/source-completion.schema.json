@@ -33,6 +33,7 @@
       "required": [
         "revision",
         "worktree_dirty",
+        "status_sha256",
         "diff_sha256",
         "superproject_revision"
       ],
@@ -43,6 +44,10 @@
         },
         "worktree_dirty": {
           "type": "boolean"
+        },
+        "status_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
         },
         "diff_sha256": {
           "type": ["string", "null"],

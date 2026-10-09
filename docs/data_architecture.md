@@ -39,6 +39,16 @@ declared bytes were verified and copied.
 Snapshot payloads are marked `-text` in `.gitattributes`, so Git never changes
 line endings and invalidates byte-level hashes on checkout.
 
+Every file must belong to exactly one dataset record. Dataset metadata records:
+
+- raw or curated stage;
+- provider and licence;
+- frequency and units;
+- vintage and publication-lag convention;
+- missingness policy;
+- causal-use restriction;
+- transformation lineage.
+
 ## Snapshot states
 
 - `provisional`: useful for platform work but not final round evidence;

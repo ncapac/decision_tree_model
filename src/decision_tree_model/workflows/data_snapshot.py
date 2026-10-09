@@ -12,7 +12,7 @@ from decision_tree_model.validation import (
     ContractError,
     load_json,
     sha256_file,
-    validate_schema,
+    validate_data_snapshot_payload,
 )
 
 
@@ -63,7 +63,7 @@ def import_data_snapshot(
     execute: bool = False,
 ) -> DataSnapshotResult:
     plan = load_json(plan_path)
-    validate_schema(plan, "data-snapshot.schema.json")
+    validate_data_snapshot_payload(plan)
     if plan["imported_at_utc"] is not None:
         raise ContractError("An import plan must set imported_at_utc to null")
 
@@ -96,4 +96,5 @@ def import_data_snapshot(
         json.dump(imported, handle, indent=2)
         handle.write("\n")
     os.replace(temporary_manifest, manifest_path)
+    validate_data_snapshot_payload(imported)
     return DataSnapshotResult(plan["snapshot_id"], len(verified), True, manifest_path)
